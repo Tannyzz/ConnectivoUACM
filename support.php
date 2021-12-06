@@ -10,13 +10,13 @@
 	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<title>CONNECTIVE - APOYOS</title>
+	<title>CONNECTIVO - APOYOS</title>
 </head>
 <body>
 	<div class="navbar-fixed">
     <nav class="grey darken-4 z-depth-1">
       <div class="nav-wrapper blue-text darken-4">
-        <a href="home.php" class="brand-logo blue-text darken-4"><i class="material-icons left">navigate_before</i>CONNECTIVE</a>
+        <a href="home.php" class="brand-logo blue-text darken-4"><i class="material-icons left">navigate_before</i>CONNECTIVO</a>
         <ul class="right hide-on-med-and-down">
           <li><?php echo $_SESSION['usuario']; ?></li>
           <li><a href="auth/logout.php">Cerrar sesión</a></li>
@@ -102,9 +102,9 @@
 			    	$result2 = mysqli_query($conexion,$sql2);
 			    	while($row = mysqli_fetch_array($result2)){ ?>
           <tr>
-            <td><?php echo $row['nombre']." ".$row['apellido_p']." ".$row['apellido_m']; ?></td>
-            <td><?php echo $row['plantel'] ?></td>
-             <td><?php echo $row['carrera'] ?></td>
+            <td><?php echo strtoupper($row['nombre'])." ".strtoupper($row['apellido_p'])." ".strtoupper($row['apellido_m']); ?></td>
+            <td><?php echo strtoupper($row['plantel']) ?></td>
+             <td><?php echo strtoupper($row['carrera']) ?></td>
           </tr>
           <?php } } }?>
         </tbody>

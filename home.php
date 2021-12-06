@@ -1,8 +1,11 @@
 <?php 
 	session_start();
 	$conexion = mysqli_connect('localhost','root','QUORRAlegacy','connective');
-	$url_tematicas = $_GET['tematicas'];
-	include("hour_control.php");
+	//$url_tematicas = $_GET['tematicas'];
+	date_default_timezone_set('America/Mexico_City');
+	$dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
+  $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+  $horaDeControl = $dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y') ." ". date('H:i:s A');
 	
 	if(empty($url_tematicas)){
 		$tematicas = "";
@@ -35,7 +38,7 @@
 	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<title>CONNECTIVE - HOME</title>
+	<title>CONNECTIVO - HOME</title>
 
 	
 </head>
@@ -57,7 +60,7 @@
 	<div class="navbar-fixed">
     <nav class="grey darken-4 z-depth-1">
       <div class="nav-wrapper blue-text darken-4">
-        <a href="home.php" class="brand-logo blue-text darken-4">CONNECTIVE</a>
+        <a href="home.php" class="brand-logo blue-text darken-4">CONNECTIVO</a>
         <ul class="right hide-on-med-and-down">
             <li><a href="home.php?tematicas=<?php echo $_SESSION['usuario'] ?>" class="tooltipped blue-text darken-3" data-position="bottom" data-delay="50" data-tooltip="Todos los temas que haz publicado en CONNECTIVE">Temáticas</a></li>
 		    <li><a href="#!" class="tooltipped blue-text darken-3" data-position="bottom" data-delay="50" data-tooltip="Son aquellas tematicas a la cuales brindaste tu apoyo">Favoritos</a></li>
@@ -73,7 +76,7 @@
   	<div class="col s12 m4 l4">
   		<ul class="collapsible" data-collapsible="accordion">
 		    <li>
-		    	<?php echo $msj ?>
+		    	<!--<?php echo $msj ?>-->
 		      <div class="collapsible-header"><i class="blue-text darken-3 material-icons">forum</i>Crea una tema</div>
 		      <div class="collapsible-body">
 					<center>

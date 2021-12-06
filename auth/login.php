@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="../css/main.css" />
     <!--[if lte IE 8]><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
     <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
-	<title>Ingresar</title>
+	<title>CONNECTIVO - Ingresar</title>
 </head>
 <body>
 <!-- Header -->
       <header id="header">
-        <h1 style="color: #1565c0;">Connective</h1>
+        <h1 style="color: #1565c0;">Connectivo</h1>
         <p>Argumenta &nbsp;&bull;&nbsp; Debate &nbsp;&bull;&nbsp; Difunde</p>
       </header>
 	<form id="signup-form" method="POST">
@@ -23,7 +23,7 @@
 	</form>  
   <footer id="footer">
         <ul class="copyright">
-          <li>&copy; MOBA(UACM);</li><li>Creacion: 25/05/2016</li>
+          <li>&copy; Alejandro Plancarte</li><li>Creación: 25/09/2021</li>
         </ul>
       </footer>  
 	<?php      
@@ -44,11 +44,10 @@
                      while($row = mysqli_fetch_array($result)){ 
 
                      			$db_user = $row['usuario'];
-                     			$db_hash = $row['contrasenia'];
+                     			$db_hash = $row['contraseña'];
                      			$db_salt = $row['salt'];                  			
                      }
-            }
-      	
+            } 
       	if ($db_hash === hash('sha512', $db_salt.$contrasenia) and $db_user === $usuario){      			
       		
       		if (mysqli_connect_errno()) {

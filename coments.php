@@ -1,5 +1,9 @@
 <?php 
 	session_start();
+	date_default_timezone_set('America/Mexico_City');
+	$dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
+  $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+  $horaDeControl = $dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y') ." ". date('H:i:s A');
 	$conexion = mysqli_connect('localhost','root','QUORRAlegacy','connective');
 	$id_tema = $_GET['id'];	
 ?>
@@ -10,14 +14,14 @@
 	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<title>CONNECTIVE - COMENTARIOS</title>
+	<title>CONNECTIVO - COMENTARIOS</title>
 </head>
 <body>
 
 	<div class="navbar-fixed">
     <nav class="grey darken-4 z-depth-1">
       <div class="nav-wrapper blue-text darken-4">
-        <a href="home.php" class="brand-logo blue-text darken-4"><i class="material-icons left">navigate_before</i>CONNECTIVE</a>
+        <a href="home.php" class="brand-logo blue-text darken-4"><i class="material-icons left">navigate_before</i>CONNECTIVO</a>
         <ul class="right hide-on-med-and-down">
           <li><?php echo $_SESSION['usuario']; ?></li>
           <li><a href="auth/logout.php">Cerrar sesión</a></li>
@@ -97,7 +101,7 @@
 
   			$usuario_comentario = $_SESSION['usuario'];
   			$comentario = $_POST['comentario'];
-  			$fecha_publicacion_comentario = date("Y-m-d H:i:s");
+  			$fecha_publicacion_comentario = $horaDeControl;
   			
   			if (mysqli_connect_errno()) {
                 echo "<center><p style=\"color:#b40000\"><strong>Falló la conexion a la Base de Datos.</strong></p></center>";                              
@@ -133,11 +137,11 @@
   		?>
 		   <li class="collection-item avatar">
 		      <i class="material-icons circle yellow darken-1">star_border</i>
-		      <b><span class="title"><?php echo ucwords(str_replace("."," ",$row['usuario'])) ?></span></b>
+		      <b><span class="title"><?php echo ucwords(str_replace("."," ",$row['usuario_comentario'])) ?></span></b>
 		      <p class="container" style="font-size: 12px; text-align: justify;"><?php echo $row['descripcion']; ?></p>		      
 		      <a href="#!" class="secondary-content blue-text darken-3"><span  class="right" style="font-size: 10px"><?php echo $row['fecha_publicacion_comentario']; ?><form method="post">
 		      <input type="hidden" name="id_comentario" value="<?php echo $row['id_comentario']; ?>">
-		      		<?php if($row['usuario'] == $_SESSION['usuario']){ ?>
+		      		<?php if($row['usuario_comentario'] == $_SESSION['usuario']){ ?>
 		           		<button class="tooltipped btn-flat right" type="submit" name="eliminar_coment" data-position="botton" data-delay="10" data-tooltip="Eliminaras tu cometario para siempre" href="#!"><i class="material-icons red-text darken-1 right">delete_sweep</i></button>
 		      		<?php } ?>
 		      </form></span></a>
@@ -152,12 +156,12 @@
 								<ul class="collection">
 						      		<?php while($respuesta_ob = mysqli_fetch_array($result_respuesta_obtenida)){ ?>
 						      		 	<li class="left-align collection-item" style="background: #f1f1f1;">
-										      <b><span><?php echo ucwords(str_replace("."," ",$respuesta_ob['usuario'])); ?></span></b><br>
+										      <b><span><?php echo ucwords(str_replace("."," ",$respuesta_ob['usuario_respuesta'])); ?></span></b><br>
 										      <span style="font-size: 10px">Publicado: </span><span style="font-size: 10px" class="blue-text darken-3"><?php echo $respuesta_ob['fecha_publicacion_respuesta']; ?></span><br>
-										      <span class="left-align" style="font-size: 12px"><?php echo $respuesta_ob['descripcion']; ?></span>	
+										      <span class="left-align" style="font-size: 12px"><?php echo $respuesta_ob['respuesta']; ?></span>	
 											      <form method="POST" class="right-align">
 											      <input type="hidden" name="id_respuesta" value="<?php echo $respuesta_ob['id_respuesta']; ?>">
-											      		<?php if($respuesta_ob['usuario'] == $_SESSION['usuario']){ ?>
+											      		<?php if($respuesta_ob['usuario_respuesta'] == $_SESSION['usuario']){ ?>
 											           		<button class="tooltipped btn-flat" type="submit" name="eliminar_respuesta" data-position="botton" data-delay="10" data-tooltip="Eliminaras tu respuesta para siempre">
 											           		<i class="material-icons red-text darken-1">delete_sweep</i></button>
 											      		<?php } ?>
@@ -215,7 +219,7 @@
   			$usuario_respuesta = $_SESSION['usuario'];
   			$respuesta = $_POST['respuesta'];
   			$id_comentario = $_POST['id_comentario_respuesta'];
-  			$fecha_publicacion_respuesta = date("Y-m-d H:i:s");
+  			$fecha_publicacion_respuesta = $horaDeControl;
   			
   			if (mysqli_connect_errno()) {
                 echo "<center><p style=\"color:#b40000\"><strong>Falló la conexion a la Base de Datos.</strong></p></center>";                              

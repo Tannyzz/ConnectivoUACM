@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS `connective`.`estudiante` (
   `correo_institucional` VARCHAR(100) NOT NULL,
   `contraseña` VARCHAR(16) NULL DEFAULT NULL,
   `status` TINYINT(1) NULL DEFAULT NULL,
+  `plantel` TEXT NULL DEFAULT NULL,
   PRIMARY KEY (`usuario`, `matricula`, `correo_institucional`),
   UNIQUE (`matricula`,`correo_institucional`),
   INDEX `correo_institucional` (`correo_institucional` ASC))
